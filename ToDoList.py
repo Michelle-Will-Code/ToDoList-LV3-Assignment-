@@ -58,7 +58,7 @@ class Task_Manager(): #contains all methods to manipulate/view tasks
         self.tasks.append(new_task)
         self.save_tasks_file()
         clear_screen()
-        input("Task added. \n\nPress Enter to return to main menu: ")
+        input("Task added. \nPress Enter to return to main menu: ")
         
         
     def view_all_tasks(self):
@@ -83,17 +83,17 @@ class Task_Manager(): #contains all methods to manipulate/view tasks
     def delete_task(self):
 
         if not self.tasks:
-            clear_screen()
             print("No tasks available to delete.")
-            input("Press Enter to return to the main menu.")
+            input("\nPress Enter to return to the main menu.")
             return
 
         self.view_all_tasks() #display all tasks for clarity
-        task_deletion = input("Enter the task name you wish to delete: ")
+        task_deletion = input("\nEnter the task name you wish to delete: ")
         matching_task = [task for task in self.tasks if task_deletion.lower() in task.task.lower()] #put matching tasks in list
         
         if matching_task:
             for task in matching_task:
+                clear_screen()
                 print(f"This task was found: {task}")
                 confirm = input("\nDo you wish to delete this task? y/n: ")
                 if confirm == "y":
@@ -104,16 +104,17 @@ class Task_Manager(): #contains all methods to manipulate/view tasks
             print("No matching task found.")
             return
 
-        input("Press Enter to return to main menu.")
+        input("\nPress Enter to return to main menu.")
 
     def delete_all_completed(self):
         completed_tasks = [task for task in self.tasks if task.completed]
         if completed_tasks:
-            print("Completed games: \n\n")
+            print("Completed tasks: \n\n")
             for task in completed_tasks:
                 print(task)
             confirm = input("\nDo you wish to delete all completed tasks on record? y/n ")
             if confirm == "y":
+                clear_screen()
                 self.tasks = [task for task in self.tasks if not task.completed]
                 self.save_tasks_file()
                 print("All completed tasks have been successfully removed. ")
@@ -208,10 +209,13 @@ def remove_tasks_menu():
     print(remove_sub_menu)
     deletion_choice = input("Make a choice and press Enter: ")
     if deletion_choice == "1":
+        clear_screen()
         task_manager.delete_task()
     elif deletion_choice == "2":
+        clear_screen()
         task_manager.delete_all_completed()
     elif deletion_choice == "3":
+        clear_screen()
         task_manager.delete_all()
     else:
         pass
