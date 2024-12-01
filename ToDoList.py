@@ -81,6 +81,13 @@ class Task_Manager(): #contains all methods to manipulate/view tasks
             return []
 
     def delete_task(self):
+
+        if not self.tasks:
+            clear_screen()
+            print("No tasks available to delete.")
+            input("Press Enter to return to the main menu.")
+            return
+
         self.view_all_tasks() #display all tasks for clarity
         task_deletion = input("Enter the task name you wish to delete: ")
         matching_task = [task for task in self.tasks if task_deletion.lower() in task.task.lower()] #put matching tasks in list
@@ -95,6 +102,7 @@ class Task_Manager(): #contains all methods to manipulate/view tasks
                     self.save_tasks_file()
         else:
             print("No matching task found.")
+            return
 
         input("Press Enter to return to main menu.")
 
@@ -135,7 +143,7 @@ class Task_Manager(): #contains all methods to manipulate/view tasks
             input("\nPress Enter to continue...")
             return
         task_completed = input("\nEnter the task name which has been completed: ")
-        matching_task = [task for task in self.tasks if task_completed.lower() in task.task.lower()]
+        matching_task = [task for task in incomplete_tasks if task_completed.lower() in task.task.lower()]
 
         if matching_task:
             for task in matching_task:
